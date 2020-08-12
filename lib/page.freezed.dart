@@ -13,15 +13,15 @@ class _$PageTearOff {
   const _$PageTearOff();
 
 // ignore: unused_element
-  Manga manga({@required String url}) {
-    return Manga(
+  MangaPage manga({@required String url}) {
+    return MangaPage(
       url: url,
     );
   }
 
 // ignore: unused_element
-  End end() {
-    return const End();
+  EndPage end() {
+    return const EndPage();
   }
 }
 
@@ -42,13 +42,13 @@ mixin _$Page {
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result manga(Manga value),
-    @required Result end(End value),
+    @required Result manga(MangaPage value),
+    @required Result end(EndPage value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result manga(Manga value),
-    Result end(End value),
+    Result manga(MangaPage value),
+    Result end(EndPage value),
     @required Result orElse(),
   });
 }
@@ -66,32 +66,32 @@ class _$PageCopyWithImpl<$Res> implements $PageCopyWith<$Res> {
   final $Res Function(Page) _then;
 }
 
-abstract class $MangaCopyWith<$Res> {
-  factory $MangaCopyWith(Manga value, $Res Function(Manga) then) =
-      _$MangaCopyWithImpl<$Res>;
+abstract class $MangaPageCopyWith<$Res> {
+  factory $MangaPageCopyWith(MangaPage value, $Res Function(MangaPage) then) =
+      _$MangaPageCopyWithImpl<$Res>;
   $Res call({String url});
 }
 
-class _$MangaCopyWithImpl<$Res> extends _$PageCopyWithImpl<$Res>
-    implements $MangaCopyWith<$Res> {
-  _$MangaCopyWithImpl(Manga _value, $Res Function(Manga) _then)
-      : super(_value, (v) => _then(v as Manga));
+class _$MangaPageCopyWithImpl<$Res> extends _$PageCopyWithImpl<$Res>
+    implements $MangaPageCopyWith<$Res> {
+  _$MangaPageCopyWithImpl(MangaPage _value, $Res Function(MangaPage) _then)
+      : super(_value, (v) => _then(v as MangaPage));
 
   @override
-  Manga get _value => super._value as Manga;
+  MangaPage get _value => super._value as MangaPage;
 
   @override
   $Res call({
     Object url = freezed,
   }) {
-    return _then(Manga(
+    return _then(MangaPage(
       url: url == freezed ? _value.url : url as String,
     ));
   }
 }
 
-class _$Manga with DiagnosticableTreeMixin implements Manga {
-  const _$Manga({@required this.url}) : assert(url != null);
+class _$MangaPage with DiagnosticableTreeMixin implements MangaPage {
+  const _$MangaPage({@required this.url}) : assert(url != null);
 
   @override
   final String url;
@@ -112,7 +112,7 @@ class _$Manga with DiagnosticableTreeMixin implements Manga {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is Manga &&
+        (other is MangaPage &&
             (identical(other.url, url) ||
                 const DeepCollectionEquality().equals(other.url, url)));
   }
@@ -122,8 +122,8 @@ class _$Manga with DiagnosticableTreeMixin implements Manga {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(url);
 
   @override
-  $MangaCopyWith<Manga> get copyWith =>
-      _$MangaCopyWithImpl<Manga>(this, _$identity);
+  $MangaPageCopyWith<MangaPage> get copyWith =>
+      _$MangaPageCopyWithImpl<MangaPage>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -153,8 +153,8 @@ class _$Manga with DiagnosticableTreeMixin implements Manga {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result manga(Manga value),
-    @required Result end(End value),
+    @required Result manga(MangaPage value),
+    @required Result end(EndPage value),
   }) {
     assert(manga != null);
     assert(end != null);
@@ -164,8 +164,8 @@ class _$Manga with DiagnosticableTreeMixin implements Manga {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result manga(Manga value),
-    Result end(End value),
+    Result manga(MangaPage value),
+    Result end(EndPage value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -176,29 +176,29 @@ class _$Manga with DiagnosticableTreeMixin implements Manga {
   }
 }
 
-abstract class Manga implements Page {
-  const factory Manga({@required String url}) = _$Manga;
+abstract class MangaPage implements Page {
+  const factory MangaPage({@required String url}) = _$MangaPage;
 
   String get url;
-  $MangaCopyWith<Manga> get copyWith;
+  $MangaPageCopyWith<MangaPage> get copyWith;
 }
 
-abstract class $EndCopyWith<$Res> {
-  factory $EndCopyWith(End value, $Res Function(End) then) =
-      _$EndCopyWithImpl<$Res>;
+abstract class $EndPageCopyWith<$Res> {
+  factory $EndPageCopyWith(EndPage value, $Res Function(EndPage) then) =
+      _$EndPageCopyWithImpl<$Res>;
 }
 
-class _$EndCopyWithImpl<$Res> extends _$PageCopyWithImpl<$Res>
-    implements $EndCopyWith<$Res> {
-  _$EndCopyWithImpl(End _value, $Res Function(End) _then)
-      : super(_value, (v) => _then(v as End));
+class _$EndPageCopyWithImpl<$Res> extends _$PageCopyWithImpl<$Res>
+    implements $EndPageCopyWith<$Res> {
+  _$EndPageCopyWithImpl(EndPage _value, $Res Function(EndPage) _then)
+      : super(_value, (v) => _then(v as EndPage));
 
   @override
-  End get _value => super._value as End;
+  EndPage get _value => super._value as EndPage;
 }
 
-class _$End with DiagnosticableTreeMixin implements End {
-  const _$End();
+class _$EndPage with DiagnosticableTreeMixin implements EndPage {
+  const _$EndPage();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -213,7 +213,7 @@ class _$End with DiagnosticableTreeMixin implements End {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is End);
+    return identical(this, other) || (other is EndPage);
   }
 
   @override
@@ -247,8 +247,8 @@ class _$End with DiagnosticableTreeMixin implements End {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result manga(Manga value),
-    @required Result end(End value),
+    @required Result manga(MangaPage value),
+    @required Result end(EndPage value),
   }) {
     assert(manga != null);
     assert(end != null);
@@ -258,8 +258,8 @@ class _$End with DiagnosticableTreeMixin implements End {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result manga(Manga value),
-    Result end(End value),
+    Result manga(MangaPage value),
+    Result end(EndPage value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -270,6 +270,6 @@ class _$End with DiagnosticableTreeMixin implements End {
   }
 }
 
-abstract class End implements Page {
-  const factory End() = _$End;
+abstract class EndPage implements Page {
+  const factory EndPage() = _$EndPage;
 }

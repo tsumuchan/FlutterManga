@@ -4,6 +4,8 @@ import 'package:flutter_manga/page.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 
+import 'page.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -109,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Visibility(
-                    visible: !(_pages[_currentIndex] is End),
+                    visible: !(_pages[_currentIndex] is EndPage),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.black45,

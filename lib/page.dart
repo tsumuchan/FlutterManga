@@ -5,14 +5,14 @@ part 'page.freezed.dart';
 
 @freezed
 abstract class Page with _$Page {
-  const factory Page.manga({@required String url}) = Manga;
+  const factory Page.manga({@required String url}) = MangaPage;
 
-  const factory Page.end() = End;
+  const factory Page.end() = EndPage;
 }
 
 extension PageListExt on List<Page> {
   int mangaPageLength() {
-    return where((page) => page is Manga).length;
+    return where((page) => page is MangaPage).length;
   }
 
   int lengthForIndex() {
