@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Page;
+import 'package:flutter_manga/my_rounded_rect_slider_track_shape.dart';
 import 'package:flutter_manga/page.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:preload_page_view/preload_page_view.dart';
@@ -161,31 +162,5 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
-  }
-}
-
-/// activeTrackとinactiveTrackのtrackHeightを同じにするためのSliderTrackShape
-class MyRoundedRectSliderTrackShape extends RoundedRectSliderTrackShape
-    with BaseSliderTrackShape {
-  @override
-  void paint(PaintingContext context, Offset offset,
-      {RenderBox parentBox,
-      SliderThemeData sliderTheme,
-      Animation<double> enableAnimation,
-      TextDirection textDirection,
-      Offset thumbCenter,
-      bool isDiscrete = false,
-      bool isEnabled = false,
-      double additionalActiveTrackHeight = 2}) {
-    // set additionalActiveTrackHeight 0
-    super.paint(context, offset,
-        parentBox: parentBox,
-        sliderTheme: sliderTheme,
-        enableAnimation: enableAnimation,
-        textDirection: textDirection,
-        thumbCenter: thumbCenter,
-        isDiscrete: isDiscrete,
-        isEnabled: isEnabled,
-        additionalActiveTrackHeight: 0);
   }
 }
