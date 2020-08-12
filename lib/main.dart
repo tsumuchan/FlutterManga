@@ -101,23 +101,47 @@ class _MyHomePageState extends State<MyHomePage> {
             alignment: Alignment.bottomCenter,
             child: Visibility(
               visible: !_isFullScreen,
-              child: Container(
-                height: 60,
-                color: Theme.of(context).primaryColor,
-                child: Slider(
-                  onChanged: (value) {
-                    print("onChanged: ${value.floor()}");
-                    setState(() {
-                      _currentIndex = _pageIndexSize - value.floor();
-                      _controller.jumpToPage(_currentIndex);
-                    });
-                  },
-                  inactiveColor: Colors.white,
-                  activeColor: Colors.white,
-                  value: (_pageIndexSize - _currentIndex).toDouble(),
-                  min: 0,
-                  max: _pageIndexSize.toDouble(),
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black45,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                    ),
+                    padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                    child: Text(
+                      "${_currentIndex + 1}/$_pageSize",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    height: 60,
+                    color: Theme.of(context).primaryColor,
+                    child: Slider(
+                      onChanged: (value) {
+                        print("onChanged: ${value.floor()}");
+                        setState(() {
+                          _currentIndex = _pageIndexSize - value.floor();
+                          _controller.jumpToPage(_currentIndex);
+                        });
+                      },
+                      inactiveColor: Colors.white,
+                      activeColor: Colors.white,
+                      value: (_pageIndexSize - _currentIndex).toDouble(),
+                      min: 0,
+                      max: _pageIndexSize.toDouble(),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
