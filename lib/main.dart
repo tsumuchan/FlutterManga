@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:preload_page_view/preload_page_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -51,11 +52,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final PageController _controller = PageController(
+  final _controller = PreloadPageController(
     initialPage: 0,
   );
-  final _pageSize = 10;
-  final _pageIndexSize = 9;
+  final _pageSize = 100;
+  final _pageIndexSize = 99;
   bool _isFullScreen = false;
   int _currentIndex = 0;
 
@@ -76,7 +77,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
       body: Stack(
         children: <Widget>[
-          PageView.builder(
+          Container(
+            color: Colors.black,
+          ),
+          PreloadPageView.builder(
+            preloadPagesCount: 2,
             controller: _controller,
             onPageChanged: (index) {
               print("onPageChanged: $index");
@@ -87,15 +92,12 @@ class _MyHomePageState extends State<MyHomePage> {
             reverse: true,
             itemCount: _pageSize,
             itemBuilder: (context, index) {
-              return Container(
-                color: Colors.black,
-                child: PhotoView(
-                  onTapUp: (context, details, controllerValue) {
-                    _toggleScreen();
-                  },
-                  imageProvider: NetworkImage(
-                      "https://placehold.jp/9fa0bd/ffffff/360x640.png?text=${_currentIndex + 1}ページ目"),
-                ),
+              return PhotoView(
+                onTapUp: (context, details, controllerValue) {
+                  _toggleScreen();
+                },
+                imageProvider: NetworkImage(
+                    "https://placehold.jp/9fa0b0/ffffff/360x640.png?text=Page ${index + 1}"),
               );
             },
           ),
