@@ -50,22 +50,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Iterable<int>.generate(20).forEach((element) {
+    Iterable<int>.generate(20).forEach((index) {
       _pages.add(
         Page.manga(
           url:
-              "https://placehold.jp/9fa0b0/ffffff/360x640.png?text=Page ${element + 1}",
+              "https://placehold.jp/9fa0b0/ffffff/360x640.png?text=Page ${index + 1}",
         ),
       );
     });
 
     _pages.add(Page.end());
-  }
-
-  void _toggleScreen() {
-    setState(() {
-      _isFullScreen = !_isFullScreen;
-    });
   }
 
   @override
@@ -98,7 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 manga: (url) {
                   return PhotoView(
                     onTapUp: (context, details, controllerValue) {
-                      _toggleScreen();
+                      setState(() {
+                        _isFullScreen = !_isFullScreen;
+                      });
                     },
                     imageProvider: NetworkImage(url),
                   );
