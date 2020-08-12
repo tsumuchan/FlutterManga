@@ -87,13 +87,15 @@ class _MyHomePageState extends State<MyHomePage> {
             reverse: true,
             itemCount: _pageSize,
             itemBuilder: (context, index) {
-              return Center(
+              return Container(
+                color: Colors.black,
                 child: PhotoView(
-                    onTapUp: (context, details, controllerValue) {
-                      _toggleScreen();
-                    },
-                    imageProvider: NetworkImage(
-                        "https://www.placecage.com/360/${640 + index}")),
+                  onTapUp: (context, details, controllerValue) {
+                    _toggleScreen();
+                  },
+                  imageProvider: NetworkImage(
+                      "https://placehold.jp/9fa0bd/ffffff/360x640.png?text=${_currentIndex + 1}ページ目"),
+                ),
               );
             },
           ),
