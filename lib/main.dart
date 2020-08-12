@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -72,7 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
             itemCount: 10,
             itemBuilder: (context, index) {
               return Center(
-                child: Text("$index"),
+                child: PhotoView(
+                    imageProvider: NetworkImage(
+                        "https://www.placecage.com/360/${640 + index}")),
               );
             },
           ),
