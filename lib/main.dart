@@ -3,16 +3,6 @@ import 'package:flutter_manga/page.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 
-extension PageListExt on List<Page> {
-  int mangaPageLength() {
-    return where((page) => page is Manga).length;
-  }
-
-  int lengthForIndex() {
-    return length - 1;
-  }
-}
-
 void main() {
   runApp(MyApp());
 }

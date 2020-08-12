@@ -9,3 +9,13 @@ abstract class Page with _$Page {
 
   const factory Page.end() = End;
 }
+
+extension PageListExt on List<Page> {
+  int mangaPageLength() {
+    return where((page) => page is Manga).length;
+  }
+
+  int lengthForIndex() {
+    return length - 1;
+  }
+}
