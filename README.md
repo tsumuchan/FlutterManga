@@ -1,16 +1,5 @@
-# flutter_manga
+# Flutter Manga
 
-A new Flutter application.
+Flutter Manga UI Sample App
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![68747470733a2f2f71696974612d696d6167652d73746f72652e73332e61702d6e6f727468656173742d312e616d617a6f6e6177732e636f6d2f302f3939352f65663363653866632d333531622d376437662d383933372d3937393466636637653334662e676966](https://user-images.githubusercontent.com/1281509/90146295-d6c3cb00-ddbb-11ea-9435-33818b93e329.gif)
