@@ -54,7 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
   final PageController _controller = PageController(
     initialPage: 0,
   );
+  final _pageSize = 10;
+  final _pageIndexSize = 9;
   bool _isFullScreen = false;
+  int _currentIndex = 0;
 
   void _toggleScreen() {
     setState(() {
@@ -67,16 +70,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: _isFullScreen
-          ? AppBar(
+          ? null
+          : AppBar(
               title: Text(widget.title),
-            )
-          : null,
+            ),
       body: Stack(
         children: <Widget>[
           PageView.builder(
             controller: _controller,
+            onPageChanged: (index) {
+              print("onPageChanged: $index");
+              setState(() {
+                _currentIndex = index;
+              });
+            },
             reverse: true,
-            itemCount: 10,
+            itemCount: _pageSize,
             itemBuilder: (context, index) {
               return Center(
                 child: PhotoView(
@@ -87,6 +96,30 @@ class _MyHomePageState extends State<MyHomePage> {
                         "https://www.placecage.com/360/${640 + index}")),
               );
             },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Visibility(
+              visible: !_isFullScreen,
+              child: Container(
+                height: 60,
+                color: Theme.of(context).primaryColor,
+                child: Slider(
+                  onChanged: (value) {
+                    print("onChanged: ${value.floor()}");
+                    setState(() {
+                      _currentIndex = _pageIndexSize - value.floor();
+                      _controller.jumpToPage(_currentIndex);
+                    });
+                  },
+                  inactiveColor: Colors.white,
+                  activeColor: Colors.white,
+                  value: (_pageIndexSize - _currentIndex).toDouble(),
+                  min: 0,
+                  max: _pageIndexSize.toDouble(),
+                ),
+              ),
+            ),
           ),
         ],
       ),
