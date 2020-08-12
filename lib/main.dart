@@ -3,6 +3,16 @@ import 'package:flutter_manga/page.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 
+extension PageListExt on List<Page> {
+  int mangaPageLength() {
+    return where((page) => page is Manga).length;
+  }
+
+  int lengthForIndex() {
+    return length - 1;
+  }
+}
+
 void main() {
   runApp(MyApp());
 }
@@ -135,19 +145,22 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black45,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(8),
+                  Visibility(
+                    visible: !(_pages[_currentIndex] is End),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black45,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8),
+                        ),
                       ),
-                    ),
-                    padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                    child: Text(
-                      "${_currentIndex + 1}/${_pages.length}",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
+                      padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                      child: Text(
+                        "${_currentIndex + 1}/${_pages.mangaPageLength()}",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
@@ -161,15 +174,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       onChanged: (value) {
                         print("onChanged: ${value.floor()}");
                         setState(() {
-                          _currentIndex = (_pages.length - 1) - value.floor();
+                          _currentIndex =
+                              _pages.lengthForIndex() - value.floor();
                           _controller.jumpToPage(_currentIndex);
                         });
                       },
                       inactiveColor: Colors.white,
                       activeColor: Colors.white,
-                      value: ((_pages.length - 1) - _currentIndex).toDouble(),
+                      value:
+                          (_pages.lengthForIndex() - _currentIndex).toDouble(),
                       min: 0,
-                      max: (_pages.length - 1).toDouble(),
+                      max: _pages.lengthForIndex().toDouble(),
                     ),
                   ),
                 ],
