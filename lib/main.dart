@@ -51,20 +51,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  PageController _controller = PageController(
+  final PageController _controller = PageController(
     initialPage: 0,
   );
+  bool _isFullScreen = false;
 
-  void _incrementCounter() {
-    setState(() {});
+  void _toggleScreen() {
+    setState(() {
+      _isFullScreen = !_isFullScreen;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      extendBodyBehindAppBar: true,
+      appBar: _isFullScreen
+          ? AppBar(
+              title: Text(widget.title),
+            )
+          : null,
       body: Stack(
         children: <Widget>[
           PageView.builder(
@@ -74,6 +80,9 @@ class _MyHomePageState extends State<MyHomePage> {
             itemBuilder: (context, index) {
               return Center(
                 child: PhotoView(
+                    onTapUp: (context, details, controllerValue) {
+                      _toggleScreen();
+                    },
                     imageProvider: NetworkImage(
                         "https://www.placecage.com/360/${640 + index}")),
               );
@@ -81,11 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
