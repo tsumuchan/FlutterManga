@@ -170,21 +170,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     height: 60,
                     color: Theme.of(context).primaryColor,
-                    child: Slider(
-                      onChanged: (value) {
-                        print("onChanged: ${value.floor()}");
-                        setState(() {
-                          _currentIndex =
-                              _pages.lengthForIndex() - value.floor();
-                          _controller.jumpToPage(_currentIndex);
-                        });
-                      },
-                      inactiveColor: Colors.white,
-                      activeColor: Colors.white,
-                      value:
-                          (_pages.lengthForIndex() - _currentIndex).toDouble(),
-                      min: 0,
-                      max: _pages.lengthForIndex().toDouble(),
+                    child: SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.white,
+                          inactiveTrackColor: Colors.white,
+                          thumbColor: Colors.white,
+                          trackHeight: 3.0,
+                          trackShape: MyRoundedRectSliderTrackShape()),
+                      child: Slider(
+                        onChanged: (value) {
+                          print("onChanged: ${value.floor()}");
+                          setState(() {
+                            _currentIndex =
+                                _pages.lengthForIndex() - value.floor();
+                            _controller.jumpToPage(_currentIndex);
+                          });
+                        },
+                        value: (_pages.lengthForIndex() - _currentIndex)
+                            .toDouble(),
+                        min: 0,
+                        max: _pages.lengthForIndex().toDouble(),
+                      ),
                     ),
                   ),
                 ],
@@ -194,5 +200,31 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+}
+
+/// activeTrackとinactiveTrackのtrackHeightを同じにするためのSliderTrackShape
+class MyRoundedRectSliderTrackShape extends RoundedRectSliderTrackShape
+    with BaseSliderTrackShape {
+  @override
+  void paint(PaintingContext context, Offset offset,
+      {RenderBox parentBox,
+      SliderThemeData sliderTheme,
+      Animation<double> enableAnimation,
+      TextDirection textDirection,
+      Offset thumbCenter,
+      bool isDiscrete = false,
+      bool isEnabled = false,
+      double additionalActiveTrackHeight = 2}) {
+    // set additionalActiveTrackHeight 0
+    super.paint(context, offset,
+        parentBox: parentBox,
+        sliderTheme: sliderTheme,
+        enableAnimation: enableAnimation,
+        textDirection: textDirection,
+        thumbCenter: thumbCenter,
+        isDiscrete: isDiscrete,
+        isEnabled: isEnabled,
+        additionalActiveTrackHeight: 0);
   }
 }
