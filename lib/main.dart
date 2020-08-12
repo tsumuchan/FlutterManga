@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Page;
+import 'package:flutter_manga/page.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 
@@ -55,10 +56,24 @@ class _MyHomePageState extends State<MyHomePage> {
   final _controller = PreloadPageController(
     initialPage: 0,
   );
-  final _pageSize = 100;
-  final _pageIndexSize = 99;
+  final _pages = List<Page>();
   bool _isFullScreen = false;
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    Iterable<int>.generate(20).forEach((element) {
+      _pages.add(
+        Page.manga(
+          url:
+              "https://placehold.jp/9fa0b0/ffffff/360x640.png?text=Page ${element + 1}",
+        ),
+      );
+    });
+
+    _pages.add(Page.end());
+  }
 
   void _toggleScreen() {
     setState(() {
@@ -90,14 +105,26 @@ class _MyHomePageState extends State<MyHomePage> {
               });
             },
             reverse: true,
-            itemCount: _pageSize,
+            itemCount: _pages.length,
             itemBuilder: (context, index) {
-              return PhotoView(
-                onTapUp: (context, details, controllerValue) {
-                  _toggleScreen();
+              final page = _pages[index];
+              return page.when(
+                manga: (url) {
+                  return PhotoView(
+                    onTapUp: (context, details, controllerValue) {
+                      _toggleScreen();
+                    },
+                    imageProvider: NetworkImage(url),
+                  );
                 },
-                imageProvider: NetworkImage(
-                    "https://placehold.jp/9fa0b0/ffffff/360x640.png?text=Page ${index + 1}"),
+                end: () {
+                  return Container(
+                    color: Colors.grey,
+                    child: Center(
+                      child: Text("End Page"),
+                    ),
+                  );
+                },
               );
             },
           ),
@@ -117,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
                     child: Text(
-                      "${_currentIndex + 1}/$_pageSize",
+                      "${_currentIndex + 1}/${_pages.length}",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -134,15 +161,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       onChanged: (value) {
                         print("onChanged: ${value.floor()}");
                         setState(() {
-                          _currentIndex = _pageIndexSize - value.floor();
+                          _currentIndex = (_pages.length - 1) - value.floor();
                           _controller.jumpToPage(_currentIndex);
                         });
                       },
                       inactiveColor: Colors.white,
                       activeColor: Colors.white,
-                      value: (_pageIndexSize - _currentIndex).toDouble(),
+                      value: ((_pages.length - 1) - _currentIndex).toDouble(),
                       min: 0,
-                      max: _pageIndexSize.toDouble(),
+                      max: (_pages.length - 1).toDouble(),
                     ),
                   ),
                 ],
